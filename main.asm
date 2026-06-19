@@ -18,6 +18,7 @@ section .bss
 section .text
     global _start
     extern _factorial
+    extern _average
 
 _start:
     ; Get chosen option - after verification
@@ -27,10 +28,14 @@ _start:
     mov al, byte [chosen_option]
     cmp al, '1'
     je go_factorial
-    ;jmp calc_average
+    jmp go_average
 
 go_factorial:
     call _factorial
+    jmp _exit
+
+go_average:
+    call _average
     jmp _exit
 
 
@@ -53,7 +58,6 @@ get_chosen_option:
 
     jmp verify_chosen_option
 
-    ret
 
 verify_chosen_option:
     mov al, byte [chosen_option]
@@ -73,8 +77,6 @@ print_error_option:
     int 0x80
 
     jmp get_chosen_option
-
-    ret
     
 
 

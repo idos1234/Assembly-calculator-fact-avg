@@ -54,7 +54,7 @@ _factorial:
     ; Convert the result to string
     push fact_result
     push eax
-    call number_to_string
+    call number_to_string_1
     add esp, 8
 
     mov esi, eax
@@ -109,7 +109,7 @@ calc_fact:
 
     ret
 
-number_to_string:
+number_to_string_1:
     ; Open Stack_Frame
     push ebp
     mov ebp, esp
@@ -123,14 +123,14 @@ number_to_string:
     mov eax, [ebp + 8]
     mov ebx, 10          ; Divide by 10 to get the next digit
     xor ecx, ecx
-    count_digits_loop:
+    count_digits_loop_1:
         xor edx, edx         ; Clear edx for division
         div ebx              ; Divide eax by 10 to get the next digit
         
         inc ecx              ; increase the digit count
 
         cmp eax, 0
-        jnz count_digits_loop
+        jnz count_digits_loop_1
     
     mov [temp_reg], ecx
     mov eax, [ebp + 8]
